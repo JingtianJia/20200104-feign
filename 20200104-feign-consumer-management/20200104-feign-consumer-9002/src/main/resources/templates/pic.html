@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pic</title>
+    <script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#do_upload").click(function () {
+                $.ajax({
+                    url:"/uploadAjax",
+                    data:new FormData($("#froms")[0]),
+                    type:"post",
+                    contentType:false,
+                    processData:false,
+                    success:function (data) {
+                        if(data.code==200){
+                            $("#show_pic").empty();
+                            $("#show_pic").append("<img src="+data.data+" />")
+                        }
+                    }
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+    <form id="froms">
+        Head Pic:<input type="file" name="file"/><br/>
+        <input id="do_upload" type="button" value="Submit"/>
+    </form>
+    <div id="show_pic">
+
+    </div>
+</body>
+</html>
